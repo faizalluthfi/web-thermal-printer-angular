@@ -1,5 +1,7 @@
 <p>{{status}}</p>
 <button type="button" (click)="applyUpdate()" *ngIf="updateDownloaded">Pasang Update</button>
+
+<h2>Setting</h2>
 <form [formGroup]="form" (ngSubmit)="save()">
   <div>
     <label for="web-url">Web URL</label>
@@ -12,3 +14,27 @@
   </div>
   <button type="submit">Save</button>
 </form>
+
+<h2>Instruction</h2>
+<p>Fill web URL setting</p>
+<p>Fill printer path setting, click "Test Printer" button to test printer</p>
+<p>Save setting</p>
+
+<p>Add the following codes to script tag in head tag of your application:</p>
+<pre>
+{{
+"if (typeof require === \'function\') {
+  var electron = require(\'electron\');
+
+  var remote = electron.remote;
+  var ipcRenderer = electron.ipcRenderer;
+
+  var autoUpdater = remote.getGlobal(\'autoUpdater\');
+}"
+}}
+</pre>
+
+<p>To print to thermal printer, run the following:</p>
+<pre>
+window['ipcRenderer'].send('print-note', 'This is example text');
+</pre>
