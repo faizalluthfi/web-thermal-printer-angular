@@ -17,11 +17,15 @@ export class AppComponent implements OnInit {
   checked: boolean;
 
   private readonly interval = 600000;
+
+  version: string;
   
   constructor(
     formBuilder: FormBuilder,
     private zone: NgZone
   ) {
+    this.version = window['version'];
+    
     this.form = formBuilder.group({
       web_url: null,
       printer_path: null
