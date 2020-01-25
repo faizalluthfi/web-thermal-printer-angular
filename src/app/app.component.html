@@ -1,3 +1,5 @@
+<p>{{status}}</p>
+<button type="button" (click)="applyUpdate()" *ngIf="updateDownloaded">Pasang Update</button>
 <form [formGroup]="form" (ngSubmit)="save()">
   <div>
     <label for="web-url">Web URL</label>
