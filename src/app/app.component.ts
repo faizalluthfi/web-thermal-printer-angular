@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     private zone: NgZone
   ) {
     this.version = window['version'];
-    
+
     this.form = formBuilder.group({
       web_url: null,
       printer_path: null
@@ -50,14 +50,14 @@ export class AppComponent implements OnInit {
     window['autoUpdater'].on('checking-for-update', () => {
       this.zone.run(() => {
         this.checked = false;
-        this.status = 'Memeriksa update';
+        this.status = 'Checking update';
       });
     });
     window['autoUpdater'].on('update-available', () => {
       this.zone.run(() => {
         this.checked = true;
         this.stopRegularUpdateCheck();
-        this.status = 'Update tersedia';
+        this.status = 'Update available';
       });
     });
     window['autoUpdater'].on('update-not-available', () => {
@@ -69,24 +69,24 @@ export class AppComponent implements OnInit {
     });
     window['autoUpdater'].on('error', () => {
       this.zone.run(() => {
-        this.status = this.checked ? 'Update gagal' : 'Gagal memeriksa update'
+        this.status = this.checked ? 'Update failed' : 'Failed to check update'
         this.startRegularUpdateCheck();
       });
     });
     window['autoUpdater'].on('download-progress', progressObj => {
       this.zone.run(() => {
-        const status = `Mendownload ${Math.floor(progressObj.percent)}%`;
+        const status = `Downloading ${Math.floor(progressObj.percent)}%`;
         this.status = status;
         this.updateDownloaded = false;
       });
     });
     window['autoUpdater'].on('update-downloaded', info => {
         this.zone.run(() => {
-          this.status = `Versi ${info.version} siap pasang`
+          this.status = `Update ${info.version} is ready to install`
           this.updateDownloaded = true;
           let notification = {
-            title: 'Update berhasil didownload',
-            body: 'Update otomatis dipasang ketika aplikasi dibuka selanjutnya.'
+            title: 'Update downloaded',
+            body: 'Update will be automatically applied on the next application start.'
           };
           new Notification(notification.title, notification);
           this.startRegularUpdateCheck();
