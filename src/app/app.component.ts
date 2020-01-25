@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  key = 'config';
   form: FormGroup;
   
   constructor(formBuilder: FormBuilder) {
@@ -14,7 +15,17 @@ export class AppComponent {
       web_url: null,
       printer_path: null
     });
+
+    this.loadConfig();
   }
 
-  save() {}
+  loadConfig() {
+    this.form.patchValue(
+      JSON.parse(localStorage.getItem(this.key)) || {}
+    );
+  }
+
+  save() {
+    localStorage.setItem(this.key, JSON.stringify(this.form.value));
+  }
 }
