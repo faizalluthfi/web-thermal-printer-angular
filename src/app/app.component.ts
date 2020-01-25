@@ -31,4 +31,8 @@ export class AppComponent {
     const url = this.form.value.web_url;
     if (url) window.location.href = url;
   }
+
+  testPrinter() {
+    window['ipcRenderer'].sendSync('test-printer', {printerPath: this.form.value.printer_path}) && window.alert('Print berhasil');
+  }
 }

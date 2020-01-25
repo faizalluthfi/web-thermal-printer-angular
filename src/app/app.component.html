@@ -6,6 +6,7 @@
   <div>
     <label for="printer-path">Printer Path</label>
     <input type="text" id="printer-path" formControlName="printer_path">
+    <button type="button" (click)="testPrinter()" *ngIf="form.value.printer_path">Test Printer</button>
   </div>
   <button type="submit">Save</button>
 </form>
