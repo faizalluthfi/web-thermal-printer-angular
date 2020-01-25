@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     events.forEach(event => {
       window['autoUpdater'].removeAllListeners(event);
     });
-    
+
     window['autoUpdater'].on('checking-for-update', () => {
       this.zone.run(() => {
         this.checked = false;
@@ -117,9 +117,9 @@ export class AppComponent implements OnInit {
   }
 
   loadConfig() {
-    this.form.patchValue(
-      JSON.parse(localStorage.getItem(this.key)) || {}
-    );
+    const config = JSON.parse(localStorage.getItem(this.key)) || {};
+    if (config.printer_path) window['ipcRenderer'].send('init-printer', config.printer_path);
+    this.form.patchValue(config);
   }
 
   save() {
