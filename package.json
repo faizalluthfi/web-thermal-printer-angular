@@ -1,5 +1,5 @@
 {
-  "name": "web-thermal-printer-angular",
+  "name": "web-thermal-printer",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
