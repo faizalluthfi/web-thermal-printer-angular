@@ -27,5 +27,8 @@ export class AppComponent {
 
   save() {
     localStorage.setItem(this.key, JSON.stringify(this.form.value));
+
+    const url = this.form.value.web_url;
+    if (url) window.location.href = url;
   }
 }
